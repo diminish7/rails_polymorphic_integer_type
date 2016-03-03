@@ -1,4 +1,4 @@
-# PolymorphicIntegerType
+# PolymorphicIntegerType _for Rails 3.2_
 
 Rails' polymorphic associations are pretty useful. The example they give to set it up looks like:
 ```ruby
