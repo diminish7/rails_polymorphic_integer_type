@@ -50,13 +50,14 @@ describe PolymorphicIntegerType do
 
     context "and the link is accessed through the associations" do
       before { link }
-      
+
       it "should have the proper source" do
         expect(source.source_links[0].source).to eql source
       end
     end
-    
+
   end
+
   context "When a link is given polymorphic record" do
     let(:link) { Link.create(:source => source) }
     let(:source) { cat }
@@ -140,7 +141,7 @@ describe PolymorphicIntegerType do
 
 
   end
-  
+
   context "when the association is an STI table" do
     let(:link) { Link.create(:source => source, :target => whiskey) }
     let(:source) { Dog.create(:name => "Bela", :kind => "Dog", :owner => owner) }
@@ -150,6 +151,19 @@ describe PolymorphicIntegerType do
       expect(link.source).to eql source
     end
   end
-  
+
+  describe "#_polymorphic_foreign_types" do
+    subject { Link.new }
+
+    it "is not blank" do
+      expect(subject._polymorphic_foreign_types).to_not be_nil
+      expect(subject._polymorphic_foreign_types).to_not be_empty
+    end
+
+    it "matches the class list" do
+      expect(subject._polymorphic_foreign_types).to eq Link._polymorphic_foreign_types
+    end
+  end
+
 
 end

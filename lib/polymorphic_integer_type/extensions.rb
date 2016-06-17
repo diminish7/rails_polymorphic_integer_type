@@ -82,20 +82,14 @@ module PolymorphicIntegerType
       }
       base.class_eval {
         def _polymorphic_foreign_types
-          @_polymorphic_foreign_types
+          self.class._polymorphic_foreign_types
         end
 
         def _polymorphic_foreign_types=(types)
-          @_polymorphic_foreign_types = types
+          self.class._polymorphic_foreign_types = types
         end
-
-        self._polymorphic_foreign_types = []
       }
       base.extend(ClassMethods)
-    end
-
-    def _polymorphic_foreign_types
-      self.class._polymorphic_foreign_types
     end
 
     def [](value)
